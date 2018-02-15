@@ -17,3 +17,7 @@ $router->group(['prefix' => 'user'], function($router) {
     $router->post('signup', 'UserController@signup');
     $router->post('signoff', 'UserController@signoff');
 });
+
+$router->group(['prefix' => 'car'], function($router) {
+    $router->post('/model/storeParts', 'CarModelController@storeParts');
+});
