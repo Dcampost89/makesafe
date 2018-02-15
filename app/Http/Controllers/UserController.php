@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['signin']]);
+        $this->middleware('auth:api', ['except' => ['signin', 'signup']]);
     }
 
     public function signin(Request $request) {
@@ -67,6 +67,7 @@ class UserController extends Controller
         }
         
         $user = new User;
+        $user->user_role_id = $request->input('user_role_id');
         $user->account = $request->input('account');
         $user->password = Hash::make($request->input('password'));
         $user->email = $request->has('email') ? $request->input('email') : '';
@@ -77,8 +78,9 @@ class UserController extends Controller
         $token = Auth::attempt($request->only(['account', 'password']));
         $user->api_token = $token;
         $user->save();
+        $user->userRole();
         
-        return $this->success('Successfully signed up', ['user' => $user, 'token' => $token]);
+        return $this->success('Successfully signed up', ['user' => $user, 'token' => $token], 200);
     }
 
     public function signoff() {

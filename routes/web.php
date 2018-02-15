@@ -11,10 +11,9 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+$router->group(['prefix' => 'user'], function($router) {
+    $router->post('signin', 'UserController@signin');
+    $router->post('current', 'UserController@currentUser');
+    $router->post('signup', 'UserController@signup');
+    $router->post('signoff', 'UserController@signoff');
 });
-
-$router->post('/user/signin', 'UserController@signin');
-$router->post('/user/current', 'UserController@currentUser');
-$router->post('/user/signup', 'UserController@signup');
