@@ -28,7 +28,7 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
      * @var array
      */
     protected $hidden = [
-        'password',
+        'password', 'api_token'
     ];
 
     // Rest omitted for brevity
@@ -51,5 +51,9 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function userRole() {
+        return $this->belongsTo('App\UserRole', 'user_role_id');
     }
 }

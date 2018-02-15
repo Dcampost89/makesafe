@@ -6,7 +6,7 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    public function success($data, $message, $code) {
+    public function success($message, $data, $code) {
         return response()->json(['message' => $message, 'data' => $data],  $code);
     }
 
