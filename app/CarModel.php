@@ -10,7 +10,11 @@ class CarModel extends Model
 
     protected $fillable = ['make', 'model', 'year'];
 
-    public function parts() {
+    public function carModelParts() {
         return $this->hasMany('App\CarModelPart', 'car_model_id');
     }
+
+    public function carModelDetailedInfo () {
+        return $this->hasMany('App\CarModelDetailedInfo', 'car_model_id');
+    } 
 }

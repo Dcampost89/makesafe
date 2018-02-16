@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\CarModel;
 use App\CarModelPart;
 use App\CarModelPartDetail;
+use App\CarModelDetailedInfo;
 
 class CarModelController extends Controller
 {
@@ -36,6 +37,14 @@ class CarModelController extends Controller
                     $modelPartDetail->name = $detail;
                     $modelPartDetail->save();
                 }
+            }
+
+            foreach ($row['detail'] as $detailed_info) {
+                $modelDetailedInfo = new CarModelDetailedInfo;
+                $modelDetailedInfo->car_model_id = $model->id;
+                $modelDetailedInfo->parameter = $detailed_info['parameter'];
+                $modelDetailedInfo->value = $detailed_info['value'];
+                $modelDetailedInfo->save();
             }
         }
 
